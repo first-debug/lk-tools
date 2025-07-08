@@ -31,11 +31,9 @@ func main() {
 		exitWithErr(fmt.Sprintf("failed to create output directory: %v", err))
 	}
 
-	if info, err := os.Stat(*output); err == nil && info.IsDir() {
+	if info, _ := os.Stat(*output); info.IsDir() {
 		parts := strings.Split(*url, "/")
 		*output += parts[len(parts)-1]
-	} else {
-		exitWithErr(fmt.Sprintf("failed to get information about file: %v", err))
 	}
 
 	file, err := os.OpenFile(*output, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0644)
