@@ -20,6 +20,13 @@ func main() {
 	timeout := flag.Duration("timeout", 30*time.Second, "The timeout for the HTTP request.")
 	flag.Parse()
 
+	if *url == "" {
+		exitWithErr("The -url flag is required.")
+	}
+	if *output == "" {
+		exitWithErr("The -output flag is required.")
+	}
+
 	if err := os.MkdirAll(filepath.Dir(*output), 0755); err != nil {
 		exitWithErr(fmt.Sprintf("failed to create output directory: %v", err))
 	}
