@@ -31,7 +31,7 @@ func main() {
 		exitWithErr(fmt.Sprintf("failed to create output directory: %v", err))
 	}
 
-	if info, _ := os.Stat(*output); info.IsDir() {
+	if info, _ := os.Stat(*output); info != nil && info.IsDir() {
 		parts := strings.Split(*url, "/")
 		*output += parts[len(parts)-1]
 	}
